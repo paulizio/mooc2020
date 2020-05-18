@@ -8,28 +8,37 @@ const Button=({onClick,text})=>(
 const App = (props) => {
   const [selected, setSelected] = useState(0)
   const [votes,setVotes]=useState(Array.apply(null, new Array(6)).map(Number.prototype.valueOf,0))
-  const copy={...votes}
+  const copy=[...votes]
+  console.log('copy is', copy)
+  
+  const mostVotes=votes.indexOf(Math.max(...votes))
+  console.log('index of most votes',mostVotes)
+
+  
   const randomAnecdote=()=>{
     const random=Math.round(Math.random()*5)
     setSelected(random)
-
   }
+  
   const vote=()=>{
     copy[selected]+=1
     setVotes(copy)
-    console.log(copy[selected])
-    
-  }
 
+  }
+  
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {props.anecdotes[selected]}
       <br></br>
      has {votes[selected]} votes
       <br></br>
       <Button onClick={vote} text='vote'/>
       <Button onClick={randomAnecdote} text='next anecdote'/>
-      
+      <h2>Anecdote with most votes</h2>
+      {props.anecdotes[mostVotes]}
+      <br></br>
+      has {votes[mostVotes]} votes
     </div>
   )
  
