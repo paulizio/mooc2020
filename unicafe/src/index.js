@@ -20,13 +20,18 @@ const Statistics=({good,neutral,bad,all,points})=>{
   <tbody>
   <h2>Statistics</h2>
   <tr>
-<td>Good: {good}</td>
-<td>Neutral: {neutral}</td>
-<td>Bad: {bad}</td>
-<td>All: {all}</td>
-<td>Average: {average(points,all)}</td>
-<td>Positiivisia: {positive(good,all)}</td>
+<td>good: {good}</td>
   </tr>
+
+<td>neutral: {neutral}</td>
+<tr>
+<td>bad: {bad}</td>
+</tr>
+<td>all: {all}</td>
+<tr>
+<td>average: {average(points,all)}</td>
+</tr>
+<td>positive: {positive(good,all)}</td>
   </tbody>
   </table>
  
@@ -60,6 +65,19 @@ const App = () => {
     setNeutral(neutral+1)
     setAll(all+1)
   }
+ if(all===0){
+   return(
+    <div>
+    <Header/>
+    <Button onClick={clickGood} text='good' />
+    <Button onClick={clickNeutral} text='neutral' />
+    <Button onClick={clickBad} text='bad' />
+    <h2>Statistics</h2>
+    <p>No feedback given</p>
+    
+  </div>
+   )
+ }
   return (
     <div>
       <Header/>
