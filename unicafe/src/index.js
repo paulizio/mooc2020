@@ -7,6 +7,13 @@ const Header=()=>(
 const Button=({onClick,text})=>(
   <button onClick={onClick}>{text}</button>
 )
+const StatisticsLine=({text,value})=>{
+  return(
+<tr>
+  <td>{text}: {value}</td>
+  </tr>
+  )
+}
 const Statistics=({good,neutral,bad,all,points})=>{
   const average=function(a,b){
     return (a/b)
@@ -17,22 +24,13 @@ const Statistics=({good,neutral,bad,all,points})=>{
   return(
 
   <table>
-  <tbody>
   <h2>Statistics</h2>
-  <tr>
-<td>good: {good}</td>
-  </tr>
-
-<td>neutral: {neutral}</td>
-<tr>
-<td>bad: {bad}</td>
-</tr>
-<td>all: {all}</td>
-<tr>
-<td>average: {average(points,all)}</td>
-</tr>
-<td>positive: {positive(good,all)}</td>
-  </tbody>
+<StatisticsLine text='good' value={good}/>
+<StatisticsLine text='neutral' value={neutral}/>
+<StatisticsLine text='bad' value={bad}/>
+<StatisticsLine text='all' value={all}/>
+<StatisticsLine text='average' value= {average(points,all)}/>
+<StatisticsLine text='positive' value={positive(good,all)}/>
   </table>
  
   )
