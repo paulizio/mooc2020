@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect,useState} from 'react';
+import axios from 'axios'
+import Country from './components/Country'
+const App=()=>{
+const [countries,setCountries]=useState([])
+const [finder,setFinder]=useState('')
+useEffect(()=>{
+  axios
+  .get('https://restcountries.eu/rest/v2/all')
+  .then(response=>{
+    console.log('promise fulfilled')
+    setCountries(response.data)
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  })
+},[])
+console.log('render', countries.length,' countries')
+const handleFinderChange=(event)=>{
+setFinder(event.target.value)
+
+}
+
+  return(
+    <div>
+<form>
+  find countries <input value={finder} onChange={handleFinderChange}/>
+</form>
+<Country countries={countries} finder={finder} setCountries={setCountries} setFinder={setFinder}/>
+
     </div>
-  );
+  )
 }
 
 export default App;
