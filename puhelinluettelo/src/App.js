@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from 'react'
-import axios from 'axios'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
+import personService from './services/person'
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
@@ -12,13 +12,11 @@ const App = () => {
   ])
 
   useEffect(()=>{
-    console.log('effect')
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response=>{
-      console.log(response.data)
-      setPersons(response.data)
-    })
+   personService
+   .getAll()
+   .then(response=>{
+     setPersons(response.data)
+   })
   },[])
   console.log('render',persons.length,' persons')
    
@@ -40,6 +38,15 @@ const App = () => {
     setFilter(event.target.value)
     console.log(event.target.value)
   }
+  const handleDelete=(id,name)=>{
+  personService
+  .destroy(id)
+  .then(response=>{
+    setPersons(persons.filter(p=>p.id!==id))
+    console.log(response)
+  }
+    
+    )}
 const addNote=(event)=>{
   event.preventDefault()
   const personObject={
@@ -48,6 +55,13 @@ const addNote=(event)=>{
     key:newName
   
 }
+personService
+.create(personObject)
+.then(response=>{
+  setPersons(persons.concat(response.data))
+  setNewName('')
+  
+})
 persons.some(p=>p.name.toLowerCase()===personObject.name.toLowerCase())?alert(`${newName} on jo luettelossa`):
 setPersons(persons.concat(personObject))
 }
@@ -58,7 +72,7 @@ setPersons(persons.concat(personObject))
       <h2>add new</h2>
 <PersonForm addNote={addNote} newName={newName} newPhone={newPhone} handlePersonChange={handlePersonChange} handleNewPhone={handleNewPhone} />
       <h2>Numbers</h2>
-<Persons persons={persons} filter={filter}/>
+<Persons persons={persons} filter={filter} handleDelete={handleDelete}/>
     </div>
   )
 
