@@ -41,7 +41,7 @@
     },
     {
       "name": "moritz",
-      "number": "321",
+      "number": "123",
       "key": "moritz",
       "id": 9
     },
@@ -50,6 +50,12 @@
       "number": "321",
       "key": "Maimu",
       "id": 10
+    },
+    {
+      "name": "Jari Litmanen",
+      "number": "23232",
+      "key": "Jari Litmanen",
+      "id": 11
     }
   ]
 }
