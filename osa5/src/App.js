@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useLayoutEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -7,6 +7,9 @@ const App = () => {
   const [username,setUsername]=useState('')
   const [password,setPassword]=useState('')
   const [user,setUser]=useState(null)
+  const [title,setTitle]=useState('')
+  const [author,setAuthor]=useState('')
+  const [url,setUrl]=useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -14,7 +17,7 @@ const App = () => {
       )  
     }, [])
     
-    useEffect(()=>{
+    useLayoutEffect(()=>{
       const loggedUserJSON=window.localStorage.getItem('loggedUser')
       if(loggedUserJSON){
         const user=JSON.parse(loggedUserJSON)
@@ -68,6 +71,37 @@ const loginForm=()=>(
 
 const blogForm=()=>(
   <div>
+    <form>
+      <div>
+        title:
+      <input
+       type="text"
+       value={title}
+       name="title:"
+       onChange={({target})=>setTitle(target.value)}
+      />
+      </div>
+      <div>
+        author:
+      <input
+       type="text"
+       value={author}
+       name="author:"
+       onChange={({target})=>setAuthor(target.value)}
+       />
+       </div>
+   
+       <div>
+         url:
+      <input
+        type="text"
+       value={url}
+       name="url:"
+       onChange={({target})=>setUrl(target.value)}
+       />
+       </div>
+       <button type="submit" onClick={newBlog}>create</button>
+    </form>
   {blogs.map(blog =>
     <Blog key={blog.id} blog={blog} />
   )}
@@ -78,6 +112,23 @@ const handleLogOut=(event)=>{
   window.localStorage.removeItem('loggedUser')
   setUser(null)
 }
+const newBlog=(event)=>{
+  event.preventDefault()
+  const blogObject={
+    title:title,
+    author:author,
+    url:url,
+  }
+  blogService.create(blogObject)
+  .then(returnedBlog=>{
+    setBlogs(blogs.concat(returnedBlog))
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+  })
+  
+}
+
 
   return (
     <div>
@@ -87,8 +138,7 @@ const handleLogOut=(event)=>{
   <p>{user.name} logged in <button onClick={handleLogOut}>logout</button></p>
   {blogForm()}
   </div>:
-     loginForm()
-     
+     loginForm()   
     }
     </div>
     
