@@ -2,6 +2,9 @@ import React, { useState, useEffect,useLayoutEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import './App.css'
+import Notification from './components/Notification'
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username,setUsername]=useState('')
@@ -10,7 +13,8 @@ const App = () => {
   const [title,setTitle]=useState('')
   const [author,setAuthor]=useState('')
   const [url,setUrl]=useState('')
-
+  const [errorMessage,setErrorMessage]=useState(null)
+  const [errorName,setErrorName]=useState(null)
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -40,7 +44,13 @@ const App = () => {
       setUsername('')
       setPassword('')
     }catch (exception){
-      console.log('error')
+     setErrorMessage('Invalid username or password')
+     setErrorName('error')
+
+      setTimeout(()=>{
+        setErrorMessage(null)
+        setErrorName(null)
+      },5000)
     }
     
   }
@@ -119,19 +129,29 @@ const newBlog=(event)=>{
     author:author,
     url:url,
   }
+  try{
   blogService.create(blogObject)
   .then(returnedBlog=>{
     setBlogs(blogs.concat(returnedBlog))
     setTitle('')
     setAuthor('')
     setUrl('')
-  })
-  
+    setErrorMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+    setErrorName('success')
+    setTimeout(()=>{
+      setErrorMessage(null)
+      setErrorName(null)
+    },5000)
+  })}
+catch(exception){
+  setErrorMessage('Adding new blog failed')
+}
 }
 
 
   return (
     <div>
+<Notification message={errorMessage} className={errorName}/>
      {user?
      <div>
      <h2>blogs</h2>
