@@ -25,7 +25,7 @@ const App = () => {
      setPersons(response.data)
    })
   },[])
-  console.log('render',persons.length,' persons')
+  // console.log('render',persons.length,' persons')
    
   const handlePersonChange=(event)=>{
     setNewName(event.target.value)
