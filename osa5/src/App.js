@@ -20,18 +20,18 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-      )  
-    }, [])
-    
-    useLayoutEffect(()=>{
-      const loggedUserJSON=window.localStorage.getItem('loggedUser')
-      if(loggedUserJSON){
-        const user=JSON.parse(loggedUserJSON)
-        setUser(user)
-        blogService.setToken(user.token)
-      }
-    },[])
-  const handleLogin=async(event)=>{
+    )
+  }, [])
+
+  useLayoutEffect(() => {
+    const loggedUserJSON=window.localStorage.getItem('loggedUser')
+    if(loggedUserJSON){
+      const user=JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  },[])
+  const handleLogin=async(event) => {
     event.preventDefault()
 
     try{
@@ -46,88 +46,88 @@ const App = () => {
       setUsername('')
       setPassword('')
     }catch (exception){
-     setErrorMessage('Invalid username or password')
-     setErrorName('error')
+      setErrorMessage('Invalid username or password')
+      setErrorName('error')
 
-      setTimeout(()=>{
+      setTimeout(() => {
         setErrorMessage(null)
         setErrorName(null)
       },5000)
     }
-    
+
   }
-const loginForm=()=>(
-  <form onSubmit={handleLogin}>
-    <div>
+  const loginForm=() => (
+    <form onSubmit={handleLogin}>
+      <div>
       username
-      <input 
-      type="text"
-      value={username}
-      name="Username"
-      onChange={({target})=>setUsername(target.value)}
-      />
-    </div>
-    <div>
+        <input
+          type="text"
+          value={username}
+          name="Username"
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
     password
-    <input
-    type="text"
-    value={password}
-    name="Password"
-    onChange={({target})=>setPassword(target.value)}
-    />
-    </div>
-    <button type="submit">login</button>
+        <input
+          type="text"
+          value={password}
+          name="Password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type="submit">login</button>
 
-  </form>
-)
+    </form>
+  )
 
-const blogForm=()=>(
-  <Togglable buttonLabel='new blog' ref={blogFormRef}>
-    <BlogForm createBlog={addBlog}/>
-  </Togglable>
-)
-const handleLogOut=(event)=>{
-  event.preventDefault()
-  window.localStorage.removeItem('loggedUser')
-  setUser(null)
-}
-const addBlog=(blogObject)=>{
-  try{
-  blogFormRef.current.toggleVisibility()
-  blogService
-  .create(blogObject)
-  .then(returnedBlog=>{
-    setBlogs(blogs.concat(returnedBlog))
-    setErrorMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
-    setErrorName('success')
-    setTimeout(()=>{
-      setErrorMessage(null)
-      setErrorName(null)
-    },5000)
-    })
-}catch(exception){
-  setErrorMessage('Adding new blog failed')
+  const blogForm=() => (
+    <Togglable buttonLabel='new blog' ref={blogFormRef}>
+      <BlogForm createBlog={addBlog}/>
+    </Togglable>
+  )
+  const handleLogOut=(event) => {
+    event.preventDefault()
+    window.localStorage.removeItem('loggedUser')
+    setUser(null)
   }
-}
+  const addBlog=(blogObject) => {
+    try{
+      blogFormRef.current.toggleVisibility()
+      blogService
+        .create(blogObject)
+        .then(returnedBlog => {
+          setBlogs(blogs.concat(returnedBlog))
+          setErrorMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+          setErrorName('success')
+          setTimeout(() => {
+            setErrorMessage(null)
+            setErrorName(null)
+          },5000)
+        })
+    }catch(exception){
+      setErrorMessage('Adding new blog failed')
+    }
+  }
 
   return (
     <div>
-<Notification message={errorMessage} className={errorName}/>
-     {user?
-     <div>
-     <h2>blogs</h2>
-  <p>{user.name} logged in <button onClick={handleLogOut}>logout</button></p>
-  {blogForm()}
-  {blogs.map(blog =>
-    <Blog key={blog.id} blog={blog} />
-  )}
-  </div>:
-     loginForm()   
-    }
-     
+      <Notification message={errorMessage} className={errorName}/>
+      {user?
+        <div>
+          <h2>blogs</h2>
+          <p>{user.name} logged in <button onClick={handleLogOut}>logout</button></p>
+          {blogForm()}
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>:
+        loginForm()
+      }
+
     </div>
-    
-     
+
+
   )
 }
 
