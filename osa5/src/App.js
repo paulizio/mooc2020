@@ -12,9 +12,6 @@ const App = () => {
   const [username,setUsername]=useState('')
   const [password,setPassword]=useState('')
   const [user,setUser]=useState(null)
-  const [title,setTitle]=useState('')
-  const [author,setAuthor]=useState('')
-  const [url,setUrl]=useState('')
   const [errorMessage,setErrorMessage]=useState(null)
   const [errorName,setErrorName]=useState(null)
 
@@ -85,7 +82,7 @@ const loginForm=()=>(
 )
 
 const blogForm=()=>(
-  <Togglable buttonLabel='new blog'>
+  <Togglable buttonLabel='new blog' ref={blogFormRef}>
     <BlogForm createBlog={addBlog}/>
   </Togglable>
 )
@@ -95,39 +92,23 @@ const handleLogOut=(event)=>{
   setUser(null)
 }
 const addBlog=(blogObject)=>{
+  try{
   blogFormRef.current.toggleVisibility()
   blogService
   .create(blogObject)
   .then(returnedBlog=>{
     setBlogs(blogs.concat(returnedBlog))
-  })
+    setErrorMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+    setErrorName('success')
+    setTimeout(()=>{
+      setErrorMessage(null)
+      setErrorName(null)
+    },5000)
+    })
+}catch(exception){
+  setErrorMessage('Adding new blog failed')
+  }
 }
-// const newBlog=(event)=>{
-//   event.preventDefault()
-//   const blogObject={
-//     title:title,
-//     author:author,
-//     url:url,
-//   }
-//   try{
-//   blogService.create(blogObject)
-//   .then(returnedBlog=>{
-//     setBlogs(blogs.concat(returnedBlog))
-//     setTitle('')
-//     setAuthor('')
-//     setUrl('')
-//     setErrorMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
-//     setErrorName('success')
-//     setTimeout(()=>{
-//       setErrorMessage(null)
-//       setErrorName(null)
-//     },5000)
-//   })}
-// catch(exception){
-//   setErrorMessage('Adding new blog failed')
-// }
-// }
-
 
   return (
     <div>

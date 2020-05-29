@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import Blog from './Blog'
+
 const BlogForm=({createBlog})=>{
     const [title,setNewTitle]=useState('')
     const [author,setNewAuthor]=useState('')
     const [url,setNewUrl]=useState('')
-    const [blogs,SetBlogs]=useState([])
+
 
     const handleTitleChange=(event)=>{
     setNewTitle(event.target.value)
@@ -27,6 +27,7 @@ const BlogForm=({createBlog})=>{
         setNewUrl('')
        
     }
+    
     return(
         <div>
             <h2>Add new blog</h2>
