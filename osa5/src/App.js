@@ -82,7 +82,7 @@ const App = () => {
   )
   const showBlogs=() => {
     return blogs.map(blog =>
-      <Blog key={blog.id} blog={blog} buttonLabel="show" />
+      <Blog key={blog.id} blog={blog} buttonLabel="view" />
     )
   }
   const blogForm=() => (

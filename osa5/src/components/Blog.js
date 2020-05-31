@@ -28,10 +28,10 @@ const Blog=React.forwardRef((props,ref) => {
   })
   return(
     <div>
-      <div style={hidenWhenVisible}>
-        {props.blog.title} {props.blog.author} <button onClick={toggleVisibility}>view</button>
+      <div style={hidenWhenVisible} className="hideInfo">
+        {props.blog.title} {props.blog.author} <button onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className="showAllInfo">
         {props.blog.title} {props.blog.author} <button onClick={toggleVisibility}>hide</button>
         <br/>
         {props.blog.url}
