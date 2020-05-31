@@ -1,9 +1,9 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import {render} from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Blog from './Blog'
 
-test('renders title and author but not url or likes',()=>{
+test('renders title and author but not url or likes',() => {
   const blog={
     title:'Testing some components',
     author:'Testmaster',
