@@ -61,6 +61,7 @@ const App = () => {
       <div>
       username
         <input
+          id='username'
           type="text"
           value={username}
           name="Username"
@@ -70,13 +71,14 @@ const App = () => {
       <div>
     password
         <input
+          id='password'
           type="text"
           value={password}
           name="Password"
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button type="submit">login</button>
+      <button id='login-button' type="submit">login</button>
 
     </form>
   )
@@ -120,7 +122,7 @@ const App = () => {
       {user?
         <div>
           <h2>blogs</h2>
-          <p>{user.name} logged in <button onClick={handleLogOut}>logout</button></p>
+          <p>{user.name} logged in <button id='logout-button' onClick={handleLogOut}>logout</button></p>
           {blogForm()}
           {showBlogs()}
         </div>:
