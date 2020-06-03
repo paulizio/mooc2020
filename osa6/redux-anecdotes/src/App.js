@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {reducer} from './reducers/anecdoteReducer'
+
 
 const App = () => {
   const anecdotes = useSelector(state => state)
@@ -19,12 +19,12 @@ console.log('votes',anecdotes)
     <div>
       <h2>Anecdotes</h2>
       {anecdotes.map(anecdote =>
-        <div key={anecdote.id}>
+        <div key={anecdote.key}>
           <div>
             {anecdote.content}
           </div>
           <div>
-            has {anecdote.votes}
+            has {anecdote.votes} 
             <button onClick={() => vote(anecdote.id)}>vote</button>
           </div>
         </div>
