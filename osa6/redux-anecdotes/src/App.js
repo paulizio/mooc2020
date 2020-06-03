@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { getByDisplayValue } from '@testing-library/react'
-import {newAnecdote} from './reducers/anecdoteReducer'
+import {newAnecdote,addVote} from './reducers/anecdoteReducer'
 
 const App = () => {
   const anecdotes = useSelector(state => state)
@@ -15,11 +15,7 @@ const App = () => {
   }
 
   const vote = (id) => {
-    console.log('vote', id)
-    dispatch({
-      type:'VOTE',
-      id:id
-    })
+    dispatch(addVote(id))
 
   }
 console.log('votes',anecdotes)
@@ -27,7 +23,7 @@ console.log('votes',anecdotes)
     <div>
       <h2>Anecdotes</h2>
       {anecdotes.map(anecdote =>
-        <div key={anecdote.key}>
+        <div key={anecdote.id}>
           <div>
             {anecdote.content}
           </div>
