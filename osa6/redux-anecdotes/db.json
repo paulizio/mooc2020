@@ -22,12 +22,23 @@
     },
     {
       "content": "testing anecdotes",
-      "votes": 2,
+      "votes": 3,
       "id": "a54FOYX"
     },
     {
       "content": "test",
-      "id": "Y5AK4Xx"
+      "id": "Y5AK4Xx",
+      "votes": null
+    },
+    {
+      "content": "asd",
+      "id": "k6LGbQh",
+      "votes": null
+    },
+    {
+      "content": "asdadasd",
+      "id": "53779",
+      "votes": 4
     }
   ]
 }

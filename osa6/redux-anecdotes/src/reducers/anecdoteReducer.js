@@ -25,7 +25,8 @@ export const newAnecdote=content=>{
     const anecdoteNew=await anecdoteService.createNew(content)
     dispatch({
       type:'NEWANECDOTE',
-      data:anecdoteNew
+      data:anecdoteNew,
+      votes:0
     })
   }
 }
