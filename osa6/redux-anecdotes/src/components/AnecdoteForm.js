@@ -1,14 +1,17 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {newAnecdote} from '../reducers/anecdoteReducer'
+import  { addNotification } from '../reducers/notificationReducer'
 
 const AnecdoteForm=()=>{
     const dispatch=useDispatch()
+
     const addAnecdote=(event,id)=>{
         event.preventDefault()
         const content=event.target.anecdote.value
         event.target.anecdote.value=''
         dispatch(newAnecdote(content))
+        dispatch(addNotification(`Anecdote "${content}" added to the list`))
       }
 return(
     <div>
