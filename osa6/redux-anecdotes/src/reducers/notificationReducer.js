@@ -1,10 +1,15 @@
 
   const initialState = {notification:''}
 
-export const addNotification=(notification)=>{
-    return{
+export const addNotification=(notification,timeout)=>{
+    return async(dispatch)=>{
+    dispatch({
       type:'SET_NOTIFICATION',
         notification,
+})
+    setTimeout(() => {
+        dispatch(removeNotification())
+    }, timeout);
     }
 }
     export const removeNotification=()=>{
