@@ -6,7 +6,8 @@ const AnecdoteList=(props)=>{
 const dispatch=useDispatch()
 const anecdotes = useSelector(state => state.anecdotes)
     const vote = (id,content) => {
-        dispatch(addVote(id))
+      const anecdote=anecdotes.find(a=>a.id===id)
+        dispatch(addVote(id,anecdote))
         dispatch(voteNotification(`You voted "${content}"`))
         setTimeout(() => {
           dispatch(removeNotification())

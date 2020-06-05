@@ -30,11 +30,14 @@ export const newAnecdote=content=>{
   }
 }
 
-export const addVote=(id)=>{
-  return{
+export const addVote=(id,newObject)=>{
+  return async dispatch =>{
+  const updateAnecdote=await anecdoteService.updateVote(id,newObject)
+    dispatch({
     type:'VOTE',
-    id:id
-  }
+    data:updateAnecdote
+
+  })}
 }
 const anecdoteReducer = (state = [], action) => {
   console.log('state now: ', state)
@@ -43,7 +46,7 @@ const anecdoteReducer = (state = [], action) => {
   switch(action.type){
     case 'VOTE':
       //id of anecdote we want to vote
-      const id=action.id
+      const id=action.data.id
       console.log('id is ',id)
     //anecdote we want to vote
       const anecdoteToVote=state.find(anecdote=>anecdote.id===id)
