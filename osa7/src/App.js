@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import {
-Switch,Route,Link,useParams
+Switch,Route,Link,useParams, Redirect
 } from 'react-router-dom'
 
 const Menu = () => {
@@ -38,6 +38,12 @@ const AnecdoteList = ({ anecdotes }) =>(
     </ul>
   </div>
 )
+const Notification=({notification})=>(
+    <div>
+      {notification}
+    </div>
+  )
+
 
 const About = () => (
   <div>
@@ -75,7 +81,8 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
-  }
+
+    }
 
   return (
     <div>
@@ -123,6 +130,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`a new anecdote ${anecdote.content} created!`)
+    setTimeout(() => {
+    setNotification('')  
+    }, 10000);
   }
 
   const anecdoteById = (id) =>
@@ -143,9 +154,11 @@ const App = () => {
     <div>
       <h1>Software anecdotes</h1>
       <Menu />
+      <Notification notification={notification}/>
       <Switch>
           <Route path="/create">
-          <CreateNew addNew={addNew}/>
+          {/* <CreateNew addNew={addNew}/> */}
+          {notification? <Redirect to="/"/>:<CreateNew addNew={addNew}/>}
           </Route> 
           <Route path="/about">
           <About/>
