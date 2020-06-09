@@ -17,15 +17,4 @@ const [value,setValue]=useState('')
     reset
   }
 }
-// export const resetForm = (type) => {
 
-//     const [value,setValue]=''
-
-//       const reset=()=>{
-//         setValue('')
-//       }
-//       return {
-//           value,
-//         reset
-//       }
-//     }  
