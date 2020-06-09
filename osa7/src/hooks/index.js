@@ -7,10 +7,25 @@ const [value,setValue]=useState('')
   const onChange = (event) => {
     setValue(event.target.value)
   }
-
+  const reset=()=>{
+    setValue('')
+  }
   return {
     type,
     value,
-    onChange
+    onChange,
+    reset
   }
 }
+// export const resetForm = (type) => {
+
+//     const [value,setValue]=''
+
+//       const reset=()=>{
+//         setValue('')
+//       }
+//       return {
+//           value,
+//         reset
+//       }
+//     }  

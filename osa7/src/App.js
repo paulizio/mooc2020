@@ -4,6 +4,7 @@ import {
 Switch,Route,Link,useParams, Redirect
 } from 'react-router-dom'
 import {useField} from './hooks'
+
 const Menu = () => {
   const padding = {
     paddingRight: 5
@@ -68,12 +69,9 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  // const [content, setContent] = useState('')
-  // const [author, setAuthor] = useState('')
-  // const [info, setInfo] = useState('')
-  const content=useField('content')
-  const author=useField('author')
-  const info=useField('info')
+  const content=useField('text')
+  const author=useField('text')
+  const info=useField('text')
 
 
   const handleSubmit = (e) => {
@@ -86,25 +84,35 @@ const CreateNew = (props) => {
     })
 
     }
+   
+const handleReset=(e)=>{
+e.preventDefault()
+content.reset()
+author.reset()
+info.reset()
+}
+
+
 
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
+      <form  >
         <div>
           content
-          <input name='content' value={content.value} onChange={content.onChange} />
+          <input {...content} />
         </div>
         <div>
           author
-          <input name='author' value={author.value} onChange={author.onChange} />
+          <input {...author} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info.value} onChange={info.onChange} />
+          <input {...info} />
         </div>
-        <button>create</button>
+        <button onClick={handleSubmit}>create</button><button onClick={handleReset}>reset</button>
       </form>
+ 
     </div>
   )
 
