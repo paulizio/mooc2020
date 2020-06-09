@@ -98,7 +98,7 @@ resetInfo()
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form  >
+      <form onSubmit={handleSubmit} >
         <div>
           content
           <input {...content} />
@@ -111,7 +111,7 @@ resetInfo()
           url for more info
           <input {...info} />
         </div>
-        <button onClick={handleSubmit}>create</button><button onClick={handleReset}>reset</button>
+        <button>create</button><button type="button" onClick={handleReset}>reset</button>
       </form>
  
     </div>
