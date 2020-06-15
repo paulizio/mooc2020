@@ -1,30 +1,22 @@
-import React,{ useState } from 'react'
+import React from 'react'
+import { createBlog } from '../reducers/blogReducer'
+import { useDispatch } from 'react-redux'
+const BlogForm=() => {
+  const dispatch=useDispatch()
 
-const BlogForm=({ createBlog }) => {
-  const [title,setNewTitle]=useState('')
-  const[author,setNewAuthor]=useState('')
-  const [url,setNewUrl]=useState('')
-
-
-  const handleTitleChange=(event) => {
-    setNewTitle(event.target.value)
-  }
-  const handleAuthorChange=(event) => {
-    setNewAuthor(event.target.value)
-  }
-  const handleUrlChange=(event) => {
-    setNewUrl(event.target.value)
-  }
   const addBlog=(event) => {
     event.preventDefault()
-    createBlog({
-      title:title,
-      author:author,
-      url:url
-    })
-    setNewAuthor('')
-    setNewTitle('')
-    setNewUrl('')
+    const content={
+      title:event.target.title.value,
+      author:event.target.author.value,
+      url:event.target.url.value,
+      likes:0
+    }
+    console.log('content is:',content)
+    dispatch(createBlog(content))
+    event.target.title.value=''
+    event.target.author.value=''
+    event.target.url.value=''
 
   }
 
@@ -36,28 +28,24 @@ const BlogForm=({ createBlog }) => {
         onSubmit={addBlog}>
                 title
         <input
+          name="title"
           id="title"
-          value={title}
-          onChange={handleTitleChange}
         />
         <br/>
                 author
         <input
+          name="author"
           id="author"
-          value={author}
-          onChange={handleAuthorChange}
         />
         <br/>
                 url
         <input
+          name="id"
           id="url"
-          value={url}
-          onChange={handleUrlChange}
         />
         <br/>
         <button id="savebutton" type="submit">save</button>
       </form>
-
     </div>
   )
 }

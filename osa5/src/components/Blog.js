@@ -1,8 +1,9 @@
 import React,{ useState,useImperativeHandle } from 'react'
-
+import { likeBlog,removeBlog } from '../reducers/blogReducer'
+import { useDispatch } from 'react-redux'
 const Blog=React.forwardRef((props,ref) => {
   const [visible,setVisible]=useState(false)
-
+  const dispatch=useDispatch()
   const hidenWhenVisible={
     display:visible?'none':'',
     paddingTop: 10,
@@ -26,6 +27,14 @@ const Blog=React.forwardRef((props,ref) => {
       toggleVisibility
     }
   })
+  const handleLike=blog => {
+    dispatch(likeBlog(blog))
+
+  }
+  const handleDelete=id => {
+    dispatch(removeBlog(id))
+  }
+
   return(
     <div>
       <div style={hidenWhenVisible} className="hideInfo">
@@ -36,7 +45,7 @@ const Blog=React.forwardRef((props,ref) => {
         <br/>
         {props.blog.url}
         <br/>
-        {props.blog.likes} <button>like</button>
+        {props.blog.likes} <button onClick={() => handleLike(props.blog)}>like</button> <button onClick={() => handleDelete(props.blog.id)}>delete</button>
       </div>
 
     </div>
