@@ -1,6 +1,7 @@
 import React from 'react'
 import { createBlog } from '../reducers/blogReducer'
 import { useDispatch } from 'react-redux'
+import { addSuccessNotification } from '../reducers/notificationReducer'
 const BlogForm=() => {
   const dispatch=useDispatch()
 
@@ -14,6 +15,7 @@ const BlogForm=() => {
     }
     console.log('content is:',content)
     dispatch(createBlog(content))
+    dispatch(addSuccessNotification(`Added new blog "${content.title}" by ${content.author}`,5000))
     event.target.title.value=''
     event.target.author.value=''
     event.target.url.value=''

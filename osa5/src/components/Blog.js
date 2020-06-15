@@ -1,6 +1,7 @@
 import React,{ useState,useImperativeHandle } from 'react'
 import { likeBlog,removeBlog } from '../reducers/blogReducer'
 import { useDispatch } from 'react-redux'
+import {addErrorNotification} from '../reducers/notificationReducer'
 const Blog=React.forwardRef((props,ref) => {
   const [visible,setVisible]=useState(false)
   const dispatch=useDispatch()
@@ -33,6 +34,7 @@ const Blog=React.forwardRef((props,ref) => {
   }
   const handleDelete=id => {
     dispatch(removeBlog(id))
+    dispatch(addErrorNotification(`Deleted blog "${props.blog.title}"`,5000))
   }
 
   return(

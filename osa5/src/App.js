@@ -5,7 +5,8 @@ import './App.css'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
-import {initializeBlogs} from './reducers/blogReducer'
+import { initializeBlogs } from './reducers/blogReducer'
+import { addErrorNotification } from './reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 import BlogList from './components/BlogList'
 
@@ -14,8 +15,6 @@ const App = () => {
   const [username,setUsername]=useState('')
   const [password,setPassword]=useState('')
   const [user,setUser]=useState(null)
-  const [errorMessage,setErrorMessage]=useState(null)
-  const [errorName,setErrorName]=useState(null)
 
   const dispatch=useDispatch()
 
@@ -24,12 +23,6 @@ const App = () => {
   },[dispatch])
 
   const blogFormRef=React.createRef()
-
-  // useEffect(() => {
-  //   blogService.getAll().then(blogs =>
-  //     setBlogs( blogs )
-  //   )
-  // }, [])
 
   useLayoutEffect(() => {
     const loggedUserJSON=window.localStorage.getItem('loggedUser')
@@ -54,16 +47,8 @@ const App = () => {
       setUsername('')
       setPassword('')
     }catch (exception){
-      setErrorMessage('Invalid username or password')
-      setErrorName('error')
-
-      setTimeout(() => {
-        setErrorMessage(null)
-        setErrorName(null)
-      },5000)
-    }
-
-  }
+      dispatch(addErrorNotification('Invalid username or password',5000))
+    }}
   const loginForm=() => (
     <form onSubmit={handleLogin}>
       <div>
@@ -104,7 +89,7 @@ const App = () => {
 
   return (
     <div>
-      <Notification message={errorMessage} className={errorName}/>
+      <Notification />
       {user?
         <div>
           <h2>blogs</h2>
