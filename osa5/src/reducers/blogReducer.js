@@ -23,7 +23,7 @@ export const likeBlog=blog => {
     const updatedBlog=await blogService.update(blog)
     dispatch({
       type:'LIKE_BLOG',
-      data:{blog:updatedBlog}
+      data:{ blog:updatedBlog }
     })
   }
 }

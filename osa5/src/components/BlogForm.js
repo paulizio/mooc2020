@@ -2,9 +2,11 @@ import React from 'react'
 import { createBlog } from '../reducers/blogReducer'
 import { useDispatch } from 'react-redux'
 import { addSuccessNotification } from '../reducers/notificationReducer'
+import Togglable from './Togglable'
 const BlogForm=() => {
   const dispatch=useDispatch()
 
+  const blogFormRef=React.createRef()
   const addBlog=(event) => {
     event.preventDefault()
     const content={
@@ -23,32 +25,34 @@ const BlogForm=() => {
   }
 
   return(
-    <div>
-      <h2>Add new blog</h2>
+    <Togglable buttonLabel='new blog' ref={blogFormRef}>
+      <div>
+        <h2>Add new blog</h2>
 
-      <form
-        onSubmit={addBlog}>
+        <form
+          onSubmit={addBlog}>
                 title
-        <input
-          name="title"
-          id="title"
-        />
-        <br/>
+          <input
+            name="title"
+            id="title"
+          />
+          <br/>
                 author
-        <input
-          name="author"
-          id="author"
-        />
-        <br/>
+          <input
+            name="author"
+            id="author"
+          />
+          <br/>
                 url
-        <input
-          name="id"
-          id="url"
-        />
-        <br/>
-        <button id="savebutton" type="submit">save</button>
-      </form>
-    </div>
+          <input
+            name="id"
+            id="url"
+          />
+          <br/>
+          <button id="savebutton" type="submit">save</button>
+        </form>
+      </div>
+    </Togglable>
   )
 }
 
