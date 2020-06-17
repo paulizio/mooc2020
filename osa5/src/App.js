@@ -7,7 +7,7 @@ import { initializeBlogs } from './reducers/blogReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
-import Navbar from './components/Navbar'
+import NavigationBar from './components/NavigationBar'
 import { Switch, Route } from 'react-router-dom'
 import Users from './components/Users'
 import { initializeUsers } from './reducers/getUsersReducer'
@@ -30,12 +30,11 @@ const App = () => {
   },[dispatch])
 
   return (
-    <div>
+    <div className="container-fluid">
+      <NavigationBar  user={user}/>
       <Notification />
-
       {user?
-        <div>
-          <Navbar  user={user}/>
+        <div >
           <h2>blogs</h2>
           <p>{user.name} logged in</p>
           <BlogForm/>
@@ -53,8 +52,8 @@ const App = () => {
         <Route path="/">
           {/* <LoginForm /> */}
         </Route>
-      </Switch></div>
-
+      </Switch>
+    </div>
   )
 }
 

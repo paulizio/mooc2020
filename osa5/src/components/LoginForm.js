@@ -3,6 +3,7 @@ import { addErrorNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/userReducer'
 import { Button } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
 const LoginForm=(props) => {
   const dispatch=useDispatch()
   const handleLogin=async(event) => {
@@ -21,24 +22,25 @@ const LoginForm=(props) => {
       dispatch(addErrorNotification('Invalid username or password',5000))
     }}
   return(
-    <form onSubmit={handleLogin}>
+    <Form onSubmit={handleLogin}>
       <div>
-        username
+        <Form.Label for="inputPassword5">Username</Form.Label>
         <input
           id='username'
           name="username"
         />
       </div>
       <div>
-      password
+        <Form.Label for="inputPassword5">Password</Form.Label>
         <input
           id='password'
           name="password"
         />
       </div>
-      <Button size="sm" variant="primary" id='login-button' type="submit">login</Button>
-
-    </form>
+      <div>
+        <Button size="sm" variant="primary" id='login-button' type="submit">login</Button>
+      </div>
+    </Form>
   )
 }
 export default LoginForm

@@ -31,7 +31,7 @@ export const removeNotification=() => {
 const notificationReducer=(state=initialState,action) => {
   switch(action.type){
   case'SET_ERROR_NOTIFICATION':
-    return { ...state,notification:action.notification,className:'error' }
+    return { ...state,notification:action.notification,className:'danger' }
   case 'SET_SUCCESS_NOTIFICATION':
     return { ...state,notification:action.notification,className:'success' }
   case 'REMOVENOTIFICATION':
