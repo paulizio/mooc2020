@@ -2,6 +2,7 @@ import React from 'react'
 import { addErrorNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/userReducer'
+import { Button } from 'react-bootstrap'
 const LoginForm=(props) => {
   const dispatch=useDispatch()
   const handleLogin=async(event) => {
@@ -35,7 +36,7 @@ const LoginForm=(props) => {
           name="password"
         />
       </div>
-      <button id='login-button' type="submit">login</button>
+      <Button size="sm" variant="primary" id='login-button' type="submit">login</Button>
 
     </form>
   )

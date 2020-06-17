@@ -24,6 +24,25 @@ export const logOutUser=() => {
     })
   }
 }
+export const loginWithToken=() => {
+  return async dispatch => {
+    const loggedUser=window.localStorage.getItem('loggedUser')
+    if(loggedUser){
+      const user=JSON.parse(loggedUser)
+      keepToken(user)
+
+      dispatch({
+        type:'USER_LOGIN',
+        data:{ user }
+      })
+    }
+  }
+}
+const keepToken=(user) => {
+  window.localStorage.setItem('loggedUser',JSON.stringify(user))
+  blogService.setToken(user.token)
+}
+
 const userReducer=(state=null,action) => {
   switch(action.type){
   case'USER_LOGIN':
