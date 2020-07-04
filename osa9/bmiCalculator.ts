@@ -1,7 +1,3 @@
-// interface Bmi{
-//     weight:number;
-//     height:number;
-// }
 
 const calculateBmi=(weight:number,height:number)=>{
     if(weight/Math.pow(height*0.01,2)>25){
