@@ -13,55 +13,55 @@ const parseArguments=(args:Array<string>):BmiValues=>{
         return{
             weight:Number(args[2]),
             height:Number(args[3])
-        }
+        };
     }else{
-        throw new Error('Provided values are not numbers')
+        throw new Error('Provided values are not numbers');
     }
-}
+};
 export  const calculateBmi=(weight:number,height:number):returnValues=>{
     
     if(weight/Math.pow(height*0.01,2)>25){
-var json={
+const json={
         "weight":'weight',
         "height":'weight',
         "bmi":'Overweight (too much weight)'
     
-}
-json.weight=weight.toString()
-json.height=height.toString()
+};
+json.weight=weight.toString();
+json.height=height.toString();
 
-return json
+return json;
 
     }if(weight/Math.pow(height*0.01,2)>18.5){
-        var json={
+        const json={
             "weight":'weight',
             "height":'weight',
             "bmi":'Normal weight(good weight)'
         
-    }
-    json.weight=weight.toString()
-    json.height=height.toString()
+    };
+    json.weight=weight.toString();
+    json.height=height.toString();
     
-        return json
+        return json;
 
         }else{ 
-            var json={
+            const json={
                 "weight":'weight',
                 "height":'weight',
                 "bmi":'Underweight (too little weight)'
             
-        }
-        json.weight=weight.toString()
-        json.height=height.toString()
+        };
+        json.weight=weight.toString();
+        json.height=height.toString();
         
-            return json
+            return json;
         }
-  
+    };
 try{
     const {weight,height}=parseArguments(process.argv);
-    console.log(calculateBmi(weight,height))
+    console.log(calculateBmi(weight,height));
 
 }catch(e){
-    console.log('Error, something went wrong: ',e.message)
-}
+   const result=(e as Error).message;
+    console.log('Error, something went wrong: ',result);
 }
