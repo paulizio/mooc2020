@@ -13,4 +13,9 @@ const getNonSensitiveEntries = () => {
         occupation
     }));
 };
-exports.default = { getNonSensitiveEntries };
+const addPatient = (entry) => {
+    const newPatientEntry = Object.assign({ id: (Math.floor(Math.random() * (10000000000 - 0)) + 0).toString() }, entry);
+    patientsData_1.default.push(newPatientEntry);
+    return newPatientEntry;
+};
+exports.default = { getNonSensitiveEntries, addPatient };
