@@ -4,6 +4,7 @@ Content-Type: application/json
 {
         "name":"Homer Simpson",
         "dateOfBirth":"01-01-1989",
-        "gender":"male",
+        "ssn":"abcd-1234",
+        "gender":"third",
         "occupation":"Nuclear powerplant worker"
 }

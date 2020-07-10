@@ -1,5 +1,5 @@
 import patients from '../data/patientsData';
-import {getNonSensitivePatientEntries, PatientEntry, newPatientEntry} from '../types';
+import {getNonSensitivePatientEntries, PatientEntry, NewPatientEntry} from '../types';
 
 
 const getNonSensitiveEntries=():getNonSensitivePatientEntries[]=>{
@@ -12,7 +12,7 @@ const getNonSensitiveEntries=():getNonSensitivePatientEntries[]=>{
     }));
 };
 
-const addPatient=(entry:newPatientEntry):PatientEntry=>{
+const addPatient=(entry:NewPatientEntry):PatientEntry=>{
     const newPatientEntry={
         id:(Math.floor(Math.random()*(10000000000-0))+0).toString(),
         ...entry
