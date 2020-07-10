@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/patients
+Content-Type: application/json
+
+{
+        "name":"Homer Simpson",
+        "dateOfBirth":"01-01-1989",
+        "gender":"male",
+        "occupation":"Nuclear powerplant worker"
+}
