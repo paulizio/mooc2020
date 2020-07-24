@@ -17,5 +17,8 @@ router.post('/',(req,res)=>{
         res.status(400).send(e.message);
     }
 })
+router.get('/:id',(req,res)=>{
+    res.send(patientService.findId(req.params.id))
+});
 
 export default router;

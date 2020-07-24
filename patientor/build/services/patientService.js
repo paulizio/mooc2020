@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const patientsData_1 = __importDefault(require("../data/patientsData"));
+console.log('patients is ', patientsData_1.default);
 const getNonSensitiveEntries = () => {
     return patientsData_1.default.map(({ id, name, dateOfBirth, gender, occupation }) => ({
         id,
@@ -18,4 +19,15 @@ const addPatient = (entry) => {
     patientsData_1.default.push(newPatientEntry);
     return newPatientEntry;
 };
-exports.default = { getNonSensitiveEntries, addPatient };
+const findId = (id) => {
+    let patient = patientsData_1.default.find((patient) => patient.id === id);
+    if (!patient) {
+        return undefined;
+    }
+    else if (!('entries' in patient)) {
+        let p = Object.assign(Object.assign({}, patient), { entries: [] });
+        return p;
+    }
+    return patient;
+};
+exports.default = { getNonSensitiveEntries, addPatient, findId };

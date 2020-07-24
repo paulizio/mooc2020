@@ -20,4 +20,7 @@ router.post('/', (req, res) => {
         res.status(400).send(e.message);
     }
 });
+router.get('/:id', (req, res) => {
+    res.send(patientService_1.default.findId(req.params.id));
+});
 exports.default = router;
