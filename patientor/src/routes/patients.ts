@@ -21,4 +21,15 @@ router.get('/:id',(req,res)=>{
     res.send(patientService.findId(req.params.id))
 });
 
+router.post('/:id/entries',(req,res)=>{
+    
+    const patient=patientService.findId(req.params.id);
+
+    if(patient){
+        const newEntry=req.body
+        res.json(patientService.addNewEntry(patient,newEntry))       
+    }
+
+})
+
 export default router;

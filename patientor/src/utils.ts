@@ -58,4 +58,5 @@ const toNewPatientEntry=(object:any):NewPatientEntry=>{
     }
     return newEntry;
 }
+
 export default toNewPatientEntry;

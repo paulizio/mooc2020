@@ -18,7 +18,7 @@ export interface PatientEntry{
     occupation:string,
 
 }
-interface BaseEntry{
+export interface BaseEntry{
     id:string;
     description:string;
     date:string;
@@ -77,3 +77,8 @@ export type Entries =
 |HospitalEntry
 |OccupationalHealthCareEntry
 |Hospital;
+
+export type NewEntries=
+|Omit <HospitalEntry,'id'>
+|Omit <OccupationalHealthCareEntry,'id'>
+|Omit <Hospital,'id'>;
