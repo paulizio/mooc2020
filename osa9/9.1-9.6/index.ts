@@ -10,7 +10,9 @@ app.get('/bmi',(req,res)=>{
         res.send(calculateBmi(Number(req.query.weight),Number(req.query.height)));
     }
 });
-
+app.get('/hello',(_req,res)=>{
+    res.send('Hello Fullstack!')
+})
 const PORT=3003;
 
 app.listen(PORT,()=>{
